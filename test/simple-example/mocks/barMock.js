@@ -1,8 +1,8 @@
-function bar () {
+function bar() {
   return 'barMock'
 }
 
-function rab () {
+function rab() {
   return 'rabMock'
 }
 

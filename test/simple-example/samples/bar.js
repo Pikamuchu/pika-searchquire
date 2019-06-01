@@ -1,8 +1,8 @@
-function bar () {
+function bar() {
   return 'bar'
 }
 
-function rab () {
+function rab() {
   return 'rab'
 }
 
