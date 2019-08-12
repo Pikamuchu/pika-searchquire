@@ -22,21 +22,13 @@ describe('Searchquire tests', function () {
           type: 'mock',
           basePath: './simple-example/mocks',
           fileSuffix: 'Mock.js'
-        }],
-        moduleMocks: [{
-          name: 'path',
-          stub: {
-            basename: function () {
-              return 'basmock';
-            }
-          }
         }]
       });
 
       assert.isDefined(foo);
       assert.equal(foo.bigBar(), 'BARMOCK');
       assert.equal(foo.bigRab(), 'RABMOCK');
-      assert.equal(foo.bigBas(), 'BASMOCK');
+      assert.equal(foo.bigBas('bas'), 'BAS');
     });
 
   });
