@@ -18,20 +18,32 @@ npm install -g searchquire
 
 ## Usage
 
+Resolve a module using a basePath where module is found as parameter.
+
 ```js
 import searchquire from 'searchquire';
 
-const resolveSetup = {};
+var foo = searchquire('foo', {
+  basePath: './simple-example/samples'
+});
+```
 
-const restoreOriginalModuleLoader = searchquire(resolveSetup);
+Resolve a module using a mock location to resolve dependencies.
 
-// Restore the original module loader.
-restoreOriginalModuleLoader();
+```js
+import searchquire from 'searchquire';
+
+var foo = searchquire('foo', {
+  basePath: './simple-example/samples',
+  modulePaths: [{
+    type: 'mock',
+    basePath: './simple-example/mocks',
+    fileSuffix: 'Mock.js'
+  }]
+});
 ```
 
 See tests for examples
-
-
 
 ## Developing 
  
