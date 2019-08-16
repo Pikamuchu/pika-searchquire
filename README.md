@@ -43,7 +43,23 @@ var foo = searchquire('foo', {
 });
 ```
 
-See tests for examples
+Resolve a module using a mock location to resolve dependencies with a require pattern.
+
+```js
+import searchquire from 'searchquire';
+
+var foo = searchquire('foo', {
+  basePath: './simple-example/samples',
+  modulePaths: [{
+    type: 'mock',
+    basePath: './simple-example/mocks',
+    fileSuffix: 'Mock',
+    requirePattern: ''
+  }]
+});
+```
+
+See tests for more examples
 
 ## Developing 
  
