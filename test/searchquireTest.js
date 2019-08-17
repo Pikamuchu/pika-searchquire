@@ -34,6 +34,26 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigRab(), 'RABMOCK');
       assert.equal(foo.bigBas('bas'), 'BAS');
     });
+
+
+    it('foo is resolved using mocks folders with file suffix and a string require pattern.', function() {
+      var foo = searchquire('foo', {
+        basePath: './simple-example/samples',
+        modulePaths: [
+          {
+            type: 'mock',
+            basePath: './simple-example/mocks',
+            fileSuffix: 'Mock',
+            requirePattern: './*'
+          }
+        ]
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BARMOCK');
+      assert.equal(foo.bigRab(), 'RABMOCK');
+      assert.equal(foo.bigBas('bas'), 'BAS');
+    });
   });
 
   describe('SFRA example case', function() {
