@@ -71,7 +71,7 @@ Resolve a cartridge script using mocks folders with file suffix and require patt
 ```js
 import searchquire from 'searchquire';
 
-var customerMock = searchquire('dw/customer/Customer', {
+var CustomerMock = searchquire('dw/customer/Customer', {
   basePath: './sfra-example/mocks/dw-api-mock'
 };
 

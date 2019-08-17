@@ -79,10 +79,10 @@ describe('Searchquire tests', function() {
     };
 
     it('orderHelpers is resolved using mocks folders with file suffix and require patterns', function() {
-      var customerMock = searchquire('dw/customer/Customer', dwApiMockConfig);
+      var CustomerMock = searchquire('dw/customer/Customer', dwApiMockConfig);
       var orderHelpersTest = searchquire('scripts/order/orderHelpers', cartridgeScriptConfig);
 
-      var customer = new customerMock();
+      var customer = new CustomerMock();
 
       var orders = orderHelpersTest.getOrders(customer);
 
