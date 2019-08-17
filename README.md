@@ -64,7 +64,7 @@ var foo = searchquire('foo', {
 
 See tests for more examples and details.
 
-### Saleforce Commerce Cloud SFRA scripts
+### Salesforce Commerce Cloud SFRA scripts
 
 Resolve a cartridge script using mocks folders with file suffix and require patterns for cartridge scripts and dw api.
 
