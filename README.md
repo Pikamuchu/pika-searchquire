@@ -1,6 +1,6 @@
 # Pika Searchquire
 
-[![Version](https://img.shields.io/npm/v/searchquire.svg)](https://npmjs.org/package/pika-searchquire)
+[![Version](https://img.shields.io/npm/v/searchquire.svg)](https://npmjs.org/package/searchquire)
 [![Build Status](https://img.shields.io/travis/pikamachu/pika-searchquire/master.svg)](https://travis-ci.org/pikamachu/pika-searchquire)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7a5d465f487e4f55a8e50e8201cc69b1)](https://www.codacy.com/project/antonio.marin.jimenez/pika-searchquire/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pikamachu/pika-searchquire&amp;utm_campaign=Badge_Grade_Dashboard)
 [![codecov](https://codecov.io/gh/pikamachu/pika-searchquire/branch/master/graph/badge.svg)](https://codecov.io/gh/pikamachu/pika-searchquire)

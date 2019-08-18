@@ -6,7 +6,6 @@ var searchquire = require('..');
 
 describe('Searchquire tests', function() {
   describe('Simple example case', function() {
-
     it('bar is resolved using basePath', function() {
       var bar = searchquire('bar', {
         basePath: './simple-example/samples'
@@ -35,7 +34,6 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigBas('bas'), 'BAS');
     });
 
-
     it('foo is resolved using mocks folders with file suffix and a string require pattern.', function() {
       var foo = searchquire('foo', {
         basePath: './simple-example/samples',
@@ -53,6 +51,28 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigBar(), 'BARMOCK');
       assert.equal(foo.bigRab(), 'RABMOCK');
       assert.equal(foo.bigBas('bas'), 'BAS');
+    });
+
+    it('foo is resolved using config stubs', function() {
+      var foo = searchquire('foo', {
+        basePath: './simple-example/samples',
+        moduleStubs: [
+          {
+            type: 'pathStub',
+            requirePattern: 'path',
+            stub: {
+              basename: function() {
+                return 'BASSTUB';
+              }
+            }
+          }
+        ]
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
     });
   });
 
