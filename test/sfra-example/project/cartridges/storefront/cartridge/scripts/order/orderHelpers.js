@@ -4,7 +4,7 @@ var Logger = require('dw/system/Logger').getLogger('Orders');
 var OrderMgr = require('dw/order/OrderMgr');
 var Order = require('dw/order/Order');
 
-var CustomerHelpers = require('*/cartridge/scripts/customer/CustomerHelpers');
+var CustomerHelpers = require('*/cartridge/scripts/customer/customerHelpers');
 var OrderModel = require('*/cartridge/models/order');
 
 /**
