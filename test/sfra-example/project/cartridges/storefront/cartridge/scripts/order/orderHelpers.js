@@ -1,8 +1,10 @@
 'use strict';
 
+var Logger = require('dw/system/Logger').getLogger('Orders');
 var OrderMgr = require('dw/order/OrderMgr');
 var Order = require('dw/order/Order');
 
+var CustomerHelpers = require('*/cartridge/scripts/customer/CustomerHelpers');
 var OrderModel = require('*/cartridge/models/order');
 
 /**
@@ -12,7 +14,7 @@ var OrderModel = require('*/cartridge/models/order');
  * @returns {Object} - orderModel of the current dw order object
  */
 function getOrders(currentCustomer) {
-    var customerNo = currentCustomer.profile.customerNo;
+    var customerNo = CustomerHelpers.getCustomerNo(currentCustomer);
     var customerOrders = OrderMgr.searchOrders(
         'customerNo={0} AND status!={1}',
         'creationDate desc',
@@ -23,10 +25,14 @@ function getOrders(currentCustomer) {
     var orders = [];
     while (customerOrders.hasNext()) {
         var customerOrder = customerOrders.next();
-        var orderModel = new OrderModel(
-            customerOrder
-        );
-        orders.push(orderModel);
+        try {
+          var orderModel = new OrderModel(
+              customerOrder
+          );
+          orders.push(orderModel);
+        } catch (e) {
+          Logger.debug('Error processing order {0}', customerOrder.orderNo);
+        }
     }
 
     return {

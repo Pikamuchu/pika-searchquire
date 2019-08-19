@@ -42,7 +42,7 @@ describe('Searchquire tests', function() {
             type: 'mock',
             basePath: './simple-example/mocks',
             fileSuffix: 'Mock',
-            requirePattern: './*'
+            pattern: './*'
           }
         ]
       });
@@ -56,10 +56,28 @@ describe('Searchquire tests', function() {
     it('foo is resolved using config stubs', function() {
       var foo = searchquire('foo', {
         basePath: './simple-example/samples',
+        moduleStubs: {
+          'path': {
+            basename: function() {
+              return 'BASSTUB';
+            }
+          }
+        }
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
+    });
+
+    it('foo is resolved using config stubs with regex pattern', function() {
+      var foo = searchquire('foo', {
+        basePath: './simple-example/samples',
         moduleStubs: [
           {
-            type: 'pathStub',
-            requirePattern: 'path',
+            type: 'stub-path',
+            pattern: /^path$/,
             stub: {
               basename: function() {
                 return 'BASSTUB';
@@ -82,20 +100,22 @@ describe('Searchquire tests', function() {
     };
     var cartridgeScriptConfig = {
       basePath: './sfra-example/project/cartridges/storefront/cartridge',
-      modulePaths: [
-        {
+      baseModulePaths: [{
+        pattern: /^\*\/cartridge\/(.*)/,
+        patternGroup: 1
+      }],
+      modulePaths: [{
           type: 'storefront-mock',
           basePath: './sfra-example/mocks/storefront-mock',
           fileSuffix: 'Mock',
-          requirePattern: /^\*\/cartridge\/(.*)/,
-          requirePatternGroup: 1
+          pattern: /^\*\/cartridge\/(.*)/,
+          patternGroup: 1
         },
         {
           type: 'dw-mock',
           basePath: './sfra-example/mocks/dw-api-mock',
-          requirePattern: 'dw/*'
-        }
-      ]
+          pattern: 'dw/*'
+      }]
     };
 
     it('orderHelpers is resolved using mocks folders with file suffix and require patterns', function() {

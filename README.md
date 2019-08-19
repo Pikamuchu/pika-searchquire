@@ -57,7 +57,7 @@ var foo = searchquire('foo', {
     type: 'mock',
     basePath: './simple-example/mocks',
     fileSuffix: 'Mock',
-    requirePattern: './*'
+    pattern: './*'
   }]
 });
 ```
@@ -77,20 +77,22 @@ var CustomerMock = searchquire('dw/customer/Customer', {
 
 var orderHelpersTest = searchquire('scripts/order/orderHelpers', {
   basePath: './sfra-example/project/cartridges/storefront/cartridge',
-  modulePaths: [
-    {
+  baseModulePaths: [{
+    pattern: /^\*\/cartridge\/(.*)/,
+    patternGroup: 1
+  }],
+  modulePaths: [{
       type: 'storefront-mock',
       basePath: './sfra-example/mocks/storefront-mock',
       fileSuffix: 'Mock',
-      requirePattern: /^\*\/cartridge\/(.*)/,
-      requirePatternGroup: 1
+      pattern: /^\*\/cartridge\/(.*)/,
+      patternGroup: 1
     },
     {
       type: 'dw-mock',
       basePath: './sfra-example/mocks/dw-api-mock',
-      requirePattern: 'dw/*'
-    }
-  ]
+      pattern: 'dw/*'
+  }]
 };
 ```
 

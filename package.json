@@ -1,6 +1,6 @@
 {
   "name": "searchquire",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Searches proxyquire dependencies stubs using configurable patterns.",
   "scripts": {
     "test": "nyc mocha",
