@@ -1,7 +1,7 @@
 {
   "name": "searchquire",
-  "version": "1.2.0",
-  "description": "Searches proxyquire dependencies stubs using configurable patterns.",
+  "version": "1.3.0",
+  "description": "Searches proxyquire dependencies stubs recursively using configurable patterns.",
   "scripts": {
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
@@ -19,7 +19,10 @@
     "injection",
     "test",
     "mock",
-    "stub"
+    "stub",
+    "recursive",
+    "cartridge",
+    "sfra"
   ],
   "author": "Antonio Marin",
   "license": "MIT",

@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Searchquire easily allows to override scripts dependencies during testing using configurable search patterns to locate reusable stubs and mocks.
+Searchquire easily allows to recursively override scripts dependencies during testing using configurable search patterns to locate reusable stubs and mocks.
 
 ## Installing / Getting started
 
