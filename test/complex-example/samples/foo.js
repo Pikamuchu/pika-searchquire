@@ -1,8 +1,8 @@
-var bar = require('./bar')
-var bas = require('bas')
+var bar = require('pathAlias/bar')
+var bas = require('pathAlias/bas')
 
 function bigBar() {
-  return require('./bar').bar().toUpperCase()
+  return require('pathAlias/bar').bar().toUpperCase()
 }
 
 function bigRab() {

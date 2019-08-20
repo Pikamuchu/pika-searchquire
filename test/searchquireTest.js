@@ -5,6 +5,7 @@ var assert = require('chai').assert;
 var searchquire = require('..');
 
 describe('Searchquire tests', function() {
+
   describe('Simple example case', function() {
     it('bar is resolved using basePath', function() {
       var bar = searchquire('bar', {
@@ -57,7 +58,7 @@ describe('Searchquire tests', function() {
       var foo = searchquire('foo', {
         basePath: './simple-example/samples',
         moduleStubs: {
-          'path': {
+          path: {
             basename: function() {
               return 'BASSTUB';
             }
@@ -70,10 +71,31 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigRab(), 'RAB');
       assert.equal(foo.bigBas('bas'), 'BASSTUB');
     });
+  });
+
+  describe('Complex example case', function() {
+    it('foo is resolved using a path alias', function() {
+      var foo = searchquire('foo', {
+        basePath: './complex-example/samples',
+        pattern: /^(pathAlias)\/.*/,
+        patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BAS');
+    });
 
     it('foo is resolved using config stubs with regex pattern', function() {
       var foo = searchquire('foo', {
-        basePath: './simple-example/samples',
+        basePath: './complex-example/samples',
+        baseModulePaths: [
+          {
+            pattern: /^(pathAlias)\/.*/,
+            patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+          }
+        ],
         moduleStubs: [
           {
             type: 'stub-path',
@@ -100,27 +122,25 @@ describe('Searchquire tests', function() {
     };
     var cartridgeScriptConfig = {
       basePath: './sfra-example/project/cartridges/storefront/cartridge',
-      baseModulePaths: [{
-        pattern: /^\*\/cartridge\/(.*)/,
-        patternGroup: 1
-      }],
-      modulePaths: [{
+      pattern: /^\*\/cartridge\/(.*)/,
+      modulePaths: [
+        {
           type: 'storefront-mock',
           basePath: './sfra-example/mocks/storefront-mock',
           fileSuffix: 'Mock',
-          pattern: /^\*\/cartridge\/(.*)/,
-          patternGroup: 1
+          pattern: /^\*\/cartridge\/(.*)/
         },
         {
           type: 'dw-mock',
           basePath: './sfra-example/mocks/dw-api-mock',
           pattern: 'dw/*'
-      }]
+        }
+      ]
     };
 
     it('orderHelpers is resolved using mocks folders with file suffix and require patterns', function() {
       var CustomerMock = searchquire('dw/customer/Customer', dwApiMockConfig);
-      var orderHelpersTest = searchquire('scripts/order/orderHelpers', cartridgeScriptConfig);
+      var orderHelpersTest = searchquire('*/cartridge/scripts/order/orderHelpers', cartridgeScriptConfig);
 
       var customer = new CustomerMock();
 

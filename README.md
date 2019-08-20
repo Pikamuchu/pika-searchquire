@@ -1,4 +1,4 @@
-# Pika Searchquire
+# Searchquire
 
 [![Version](https://img.shields.io/npm/v/searchquire.svg)](https://npmjs.org/package/searchquire)
 [![Build Status](https://img.shields.io/travis/pikamachu/pika-searchquire/master.svg)](https://travis-ci.org/pikamachu/pika-searchquire)
@@ -19,7 +19,7 @@ npm install searchquire --save-dev
 
 ## Usage
 
-### Javascript scripts
+### Simple examples
 
 Resolve a module using a basePath where module is found as parameter.
 
@@ -62,37 +62,96 @@ var foo = searchquire('foo', {
 });
 ```
 
+Resolve a module using stubs to resolve dependencies.
+
+```js
+import searchquire from 'searchquire';
+
+var foo = searchquire('foo', {
+  basePath: './simple-example/samples',
+  moduleStubs: {
+    'path': {
+      basename: function() {
+        return 'BASSTUB';
+      }
+    }
+  }
+});
+```
+
 See tests for more examples and details.
 
-### Salesforce Commerce Cloud SFRA scripts
+### Complex examples
+
+Resolve a module using a path alias.
+
+```js
+import searchquire from 'searchquire';
+
+foo is resolved using a path alias', function() {
+      var foo = searchquire('foo', {
+        basePath: './complex-example/samples',
+        pattern: /^(pathAlias)\/.*/,
+        patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+      });
+```
+
+Resolve a module using an array of path alias and stubs with regex pattern to resolve dependencies.
+
+```js
+import searchquire from 'searchquire';
+
+var foo = searchquire('foo', {
+  basePath: './complex-example/samples',
+  baseModulePaths: [
+    {
+      pattern: /^(pathAlias)\/.*/,
+      patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+    }
+  ],
+  moduleStubs: [
+    {
+      type: 'stub-path',
+      pattern: /^path$/,
+      stub: {
+        basename: function() {
+          return 'BASSTUB';
+        }
+      }
+    }
+  ]
+});
+```
+
+See tests for more examples and details.
+
+### Salesforce Commerce Cloud SFRA examples
 
 Resolve a cartridge script using mocks folders with file suffix and require patterns for cartridge scripts and dw api.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var CustomerMock = searchquire('dw/customer/Customer', {
   basePath: './sfra-example/mocks/dw-api-mock'
 };
 
-var orderHelpersTest = searchquire('scripts/order/orderHelpers', {
+var orderHelpersTest = searchquire('*/cartridge/scripts/order/orderHelpers', {
   basePath: './sfra-example/project/cartridges/storefront/cartridge',
-  baseModulePaths: [{
-    pattern: /^\*\/cartridge\/(.*)/,
-    patternGroup: 1
-  }],
-  modulePaths: [{
+  pattern: /^\*\/cartridge\/(.*)/,
+  modulePaths: [
+    {
       type: 'storefront-mock',
       basePath: './sfra-example/mocks/storefront-mock',
       fileSuffix: 'Mock',
-      pattern: /^\*\/cartridge\/(.*)/,
-      patternGroup: 1
+      pattern: /^\*\/cartridge\/(.*)/
     },
     {
       type: 'dw-mock',
       basePath: './sfra-example/mocks/dw-api-mock',
       pattern: 'dw/*'
-  }]
+    }
+  ]
 };
 ```
 
