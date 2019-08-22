@@ -3,6 +3,7 @@ npm-debug.log*
 
 # Coverage directory used by tools like istanbul
 coverage
+coverage.lcov
 .nyc_output
 
 # Dependency directories
@@ -21,9 +22,13 @@ CHANGELOG.md
 .editorconfig
 .eslintignore
 .eslintrc
+.eslintrc.json
 .babelrc
 .gitignore
 .prettierrc
 
 # visual studio code config
 .vscode
+
+# pika script
+pika
