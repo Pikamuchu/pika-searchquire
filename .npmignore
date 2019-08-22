@@ -24,3 +24,6 @@ CHANGELOG.md
 .babelrc
 .gitignore
 .prettierrc
+
+# visual studio code config
+.vscode
