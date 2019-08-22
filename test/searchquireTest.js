@@ -2,7 +2,7 @@
 
 var sinon = require('sinon');
 var assert = require('chai').assert;
-var searchquire = require('..');
+var searchquire = require('../lib');
 
 describe('Searchquire tests', function() {
 
@@ -87,7 +87,7 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigBas('bas'), 'BAS');
     });
 
-    it('foo is resolved using config stubs with regex pattern', function() {
+    it('foo is resolved using config stubs with regex pattern and enabling console debug log', function() {
       var foo = searchquire('foo', {
         basePath: './complex-example/samples',
         baseModulePaths: [
@@ -106,7 +106,7 @@ describe('Searchquire tests', function() {
               }
             }
           }
-        ]
+        ],
       });
 
       assert.isDefined(foo);
@@ -148,6 +148,26 @@ describe('Searchquire tests', function() {
       var orders = orderHelpersTest.getOrders(customer);
 
       assert.isDefined(orders);
+    });
+  });
+
+  describe('Misc Tests', function() {
+    it('foo is resolved with debug enabled.', function() {
+      var foo = searchquire('foo', {
+        basePath: './simple-example/samples',
+        modulePaths: [
+          {
+            type: 'mock',
+            basePath: './simple-example/mocks',
+            fileSuffix: 'Mock',
+            pattern: './*'
+          }
+        ],
+        logLevel: 0,
+        logElapseTime: true
+      });
+
+      assert.isDefined(foo);
     });
   });
 });

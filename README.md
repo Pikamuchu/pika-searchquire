@@ -88,12 +88,11 @@ Resolve a module using a path alias.
 ```js
 import searchquire from 'searchquire';
 
-foo is resolved using a path alias', function() {
-      var foo = searchquire('foo', {
-        basePath: './complex-example/samples',
-        pattern: /^(pathAlias)\/.*/,
-        patternAlias: './opinionated/folder/hierarchy/with/many/levels'
-      });
+var foo = searchquire('foo', {
+  basePath: './complex-example/samples',
+  pattern: /^(pathAlias)\/.*/,
+  patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+});
 ```
 
 Resolve a module using an array of path alias and stubs with regex pattern to resolve dependencies.
