@@ -24,7 +24,7 @@ npm install searchquire --save-dev
 Resolve a module using a basePath where module is found as parameter.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './simple-example/samples'
@@ -34,7 +34,7 @@ var foo = searchquire('foo', {
 Resolve a module using a mock location to resolve dependencies.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './simple-example/samples',
@@ -49,7 +49,7 @@ var foo = searchquire('foo', {
 Resolve a module using a mock location to resolve dependencies with a string require pattern.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './simple-example/samples',
@@ -65,7 +65,7 @@ var foo = searchquire('foo', {
 Resolve a module using stubs to resolve dependencies.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './simple-example/samples',
@@ -86,7 +86,7 @@ See tests for more examples and details.
 Resolve a module using a path alias.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './complex-example/samples',
@@ -98,7 +98,7 @@ var foo = searchquire('foo', {
 Resolve a module using an array of path alias and stubs with regex pattern to resolve dependencies.
 
 ```js
-import searchquire from 'searchquire';
+var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './complex-example/samples',
