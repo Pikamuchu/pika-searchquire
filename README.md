@@ -93,31 +93,38 @@ var foo = searchquire('foo', {
 });
 ```
 
-Resolve a module using an array of path alias and stubs with regex pattern to resolve dependencies.
+Resolve a module using an array of path alias and stubs with regex pattern to resolve dependencies with logging enabled.
 
 ```js
 var searchquire = require('searchquire');
 
-var foo = searchquire('foo', {
+var qux = searchquire('qux', {
   basePath: './complex-example/samples',
   baseModulePaths: [
     {
       name: 'alias-path',
       pattern: /^(pathAlias)\/.*/,
       patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+    },
+    {
+      name: 'another-alias-path',
+      pattern: /^(anotherPathAlias)\/.*/,
+      patternAlias: './another/opinionated/folder/hierarchy/with/many/levels'
     }
   ],
   moduleStubs: [
     {
-      name: 'stub-path',
-      pattern: /^path$/,
+      name: 'stub-zab',
+      pattern: /.*\/zab/,
       stub: {
-        basename: function() {
-          return 'BASSTUB';
+        zab: function() {
+          return 'zabstub';
         }
       }
     }
-  ]
+  ],
+  logLevel: 1,
+  logElapseTime: true
 });
 ```
 
@@ -125,21 +132,27 @@ See tests for more examples and details.
 
 ### Salesforce Commerce Cloud SFRA examples
 
-Resolve a cartridge script using mocks folders with file suffix and require patterns for cartridge scripts and dw api.
+Resolve a dw api mock.
 
 ```js
 var searchquire = require('searchquire');
 
 var CustomerMock = searchquire('dw/customer/Customer', {
   basePath: './sfra-example/mocks/dw-api-mock'
-};
+});
+```
+
+Resolve a cartridge script using mocks folders with file suffix and require patterns for cartridge scripts and dw api.
+
+```js
+var searchquire = require('searchquire');
 
 var orderHelpersTest = searchquire('*/cartridge/scripts/order/orderHelpers', {
   basePath: './sfra-example/project/cartridges/storefront/cartridge',
   pattern: '*/cartridge/(.*)',
   modulePaths: [
     {
-      name: 'cartridge-mock',
+      name: 'storefront-mock',
       basePath: './sfra-example/mocks/storefront-mock',
       fileSuffix: 'Mock',
       pattern: '*/cartridge/(.*)'
@@ -150,7 +163,7 @@ var orderHelpersTest = searchquire('*/cartridge/scripts/order/orderHelpers', {
       pattern: 'dw/*'
     }
   ]
-};
+});
 ```
 
 See tests for more examples and details.

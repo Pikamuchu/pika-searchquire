@@ -1,6 +1,6 @@
 {
   "name": "searchquire",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Searches proxyquire dependencies stubs recursively using configurable patterns.",
   "main": "./lib/index.js",
   "scripts": {
