@@ -1,9 +1,14 @@
+'use strict';
+
 function bar() {
-  return 'barMock'
+  return 'barMock';
 }
 
 function rab() {
-  return 'rabMock'
+  return 'rabMock';
 }
 
-module.exports = { bar: bar, rab: rab }
+module.exports = {
+  bar: bar,
+  rab: rab
+}

@@ -39,7 +39,6 @@ var searchquire = require('searchquire');
 var foo = searchquire('foo', {
   basePath: './simple-example/samples',
   modulePaths: [{
-    type: 'mock',
     basePath: './simple-example/mocks',
     fileSuffix: 'Mock.js'
   }]
@@ -54,7 +53,6 @@ var searchquire = require('searchquire');
 var foo = searchquire('foo', {
   basePath: './simple-example/samples',
   modulePaths: [{
-    type: 'mock',
     basePath: './simple-example/mocks',
     fileSuffix: 'Mock',
     pattern: './*'
@@ -90,7 +88,7 @@ var searchquire = require('searchquire');
 
 var foo = searchquire('foo', {
   basePath: './complex-example/samples',
-  pattern: /^(pathAlias)\/.*/,
+  pattern: '(pathAlias)/*',
   patternAlias: './opinionated/folder/hierarchy/with/many/levels'
 });
 ```
@@ -104,13 +102,14 @@ var foo = searchquire('foo', {
   basePath: './complex-example/samples',
   baseModulePaths: [
     {
+      name: 'alias-path',
       pattern: /^(pathAlias)\/.*/,
       patternAlias: './opinionated/folder/hierarchy/with/many/levels'
     }
   ],
   moduleStubs: [
     {
-      type: 'stub-path',
+      name: 'stub-path',
       pattern: /^path$/,
       stub: {
         basename: function() {
@@ -137,16 +136,16 @@ var CustomerMock = searchquire('dw/customer/Customer', {
 
 var orderHelpersTest = searchquire('*/cartridge/scripts/order/orderHelpers', {
   basePath: './sfra-example/project/cartridges/storefront/cartridge',
-  pattern: /^\*\/cartridge\/(.*)/,
+  pattern: '*/cartridge/(.*)',
   modulePaths: [
     {
-      type: 'storefront-mock',
+      name: 'cartridge-mock',
       basePath: './sfra-example/mocks/storefront-mock',
       fileSuffix: 'Mock',
-      pattern: /^\*\/cartridge\/(.*)/
+      pattern: '*/cartridge/(.*)'
     },
     {
-      type: 'dw-mock',
+      name: 'dw-mock',
       basePath: './sfra-example/mocks/dw-api-mock',
       pattern: 'dw/*'
     }

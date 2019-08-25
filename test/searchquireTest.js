@@ -22,7 +22,6 @@ describe('Searchquire tests', function() {
         basePath: './simple-example/samples',
         modulePaths: [
           {
-            type: 'mock',
             basePath: './simple-example/mocks',
             fileSuffix: 'Mock.js'
           }
@@ -32,7 +31,7 @@ describe('Searchquire tests', function() {
       assert.isDefined(foo);
       assert.equal(foo.bigBar(), 'BARMOCK');
       assert.equal(foo.bigRab(), 'RABMOCK');
-      assert.equal(foo.bigBas('bas'), 'BAS');
+      assert.equal(foo.bigBas('bas'), 'BASMOCK');
     });
 
     it('foo is resolved using mocks folders with file suffix and a string require pattern.', function() {
@@ -40,7 +39,6 @@ describe('Searchquire tests', function() {
         basePath: './simple-example/samples',
         modulePaths: [
           {
-            type: 'mock',
             basePath: './simple-example/mocks',
             fileSuffix: 'Mock',
             pattern: './*'
@@ -74,10 +72,10 @@ describe('Searchquire tests', function() {
   });
 
   describe('Complex example case', function() {
-    it('foo is resolved using a path alias', function() {
+    it('foo is resolved using a string path alias pattern', function() {
       var foo = searchquire('foo', {
         basePath: './complex-example/samples',
-        pattern: /^(pathAlias)\/.*/,
+        pattern: '(pathAlias)/*',
         patternAlias: './opinionated/folder/hierarchy/with/many/levels'
       });
 
@@ -87,33 +85,40 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigBas('bas'), 'BAS');
     });
 
-    it('foo is resolved using config stubs with regex pattern and enabling console debug log', function() {
-      var foo = searchquire('foo', {
+    it('qux is resolved using regex patterns with config stubs and enabling console debug log', function() {
+      var qux = searchquire('qux', {
         basePath: './complex-example/samples',
         baseModulePaths: [
           {
+            name: 'alias-path',
             pattern: /^(pathAlias)\/.*/,
             patternAlias: './opinionated/folder/hierarchy/with/many/levels'
+          },
+          {
+            name: 'another-alias-path',
+            pattern: /^(anotherPathAlias)\/.*/,
+            patternAlias: './another/opinionated/folder/hierarchy/with/many/levels'
           }
         ],
         moduleStubs: [
           {
-            type: 'stub-path',
-            pattern: /^path$/,
+            name: 'stub-zab',
+            pattern: /.*\/zab/,
             stub: {
-              basename: function() {
-                return 'BASSTUB';
+              zab: function() {
+                return 'zabstub';
               }
             }
           }
         ],
+        logLevel: 1,
+        logElapseTime: true
       });
 
-      assert.isDefined(foo);
-      assert.equal(foo.bigBar(), 'BAR');
-      assert.equal(foo.bigRab(), 'RAB');
-      // FIXME: this assert fail on travis CI. It should be debugged using linux.
-      // assert.equal(foo.bigBas('bas'), 'BASSTUB');
+      assert.isDefined(qux);
+      assert.equal(qux.bigBar(), 'BAR');
+      assert.equal(qux.bigBaz(), 'BAZ');
+      assert.equal(qux.bigZab(), 'ZABSTUB');
     });
   });
 
@@ -123,16 +128,16 @@ describe('Searchquire tests', function() {
     };
     var cartridgeScriptConfig = {
       basePath: './sfra-example/project/cartridges/storefront/cartridge',
-      pattern: /^\*\/cartridge\/(.*)/,
+      pattern: '*/cartridge/(.*)',
       modulePaths: [
         {
-          type: 'storefront-mock',
+          name: 'cartridge-mock',
           basePath: './sfra-example/mocks/storefront-mock',
           fileSuffix: 'Mock',
-          pattern: /^\*\/cartridge\/(.*)/
+          pattern: '*/cartridge/(.*)'
         },
         {
-          type: 'dw-mock',
+          name: 'dw-mock',
           basePath: './sfra-example/mocks/dw-api-mock',
           pattern: 'dw/*'
         }
@@ -157,7 +162,7 @@ describe('Searchquire tests', function() {
         basePath: './simple-example/samples',
         modulePaths: [
           {
-            type: 'mock',
+            name: 'mock',
             basePath: './simple-example/mocks',
             fileSuffix: 'Mock',
             pattern: './*'
