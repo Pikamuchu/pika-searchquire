@@ -5,7 +5,6 @@ var assert = require('chai').assert;
 var searchquire = require('../lib');
 
 describe('Searchquire tests', function() {
-
   describe('Simple example case', function() {
     it('bar is resolved using basePath', function() {
       var bar = searchquire('bar', {
@@ -173,6 +172,24 @@ describe('Searchquire tests', function() {
       });
 
       assert.isDefined(foo);
+    });
+
+    it('foo is resolved using stubs', function() {
+      var config = {
+        basePath: './simple-example/samples'
+      };
+      var foo = searchquire('foo', config, {
+        path: {
+          basename: function() {
+            return 'BASSTUB';
+          }
+        }
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
     });
   });
 });
