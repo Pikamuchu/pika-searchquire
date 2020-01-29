@@ -68,6 +68,22 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigRab(), 'RAB');
       assert.equal(foo.bigBas('bas'), 'BASSTUB');
     });
+
+    it('foo is resolved using proxyquire config stubs', function() {
+      var foo = searchquire('foo', {
+        basePath: './simple-example/samples',
+        path: {
+          basename: function() {
+            return 'BASSTUB';
+          }
+        }
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
+    });
   });
 
   describe('Complex example case', function() {
