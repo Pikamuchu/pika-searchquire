@@ -30,5 +30,8 @@ CHANGELOG.md
 # visual studio code config
 .vscode
 
+# github configurations
+.github
+
 # pika script
 pika
