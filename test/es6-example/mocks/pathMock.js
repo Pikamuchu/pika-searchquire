@@ -1,9 +1,5 @@
-'use strict';
+const basename = () => 'basmock';
 
-function basename() {
-  return 'basmock';
-}
-
-module.exports = {
-  basename: basename
+export {
+  basename
 }

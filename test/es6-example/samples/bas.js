@@ -1,11 +1,3 @@
-'use strict';
+import * as path from 'path';
 
-var path = require('path');
-
-function bas(file) {
-  return path.basename(file);
-}
-
-module.exports = {
-  bas: bas
-}
+export default (file) => path.basename(file);

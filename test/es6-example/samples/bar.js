@@ -1,3 +1,3 @@
-export bar = () => 'bar';
+export const bar = () => 'bar';
 
-export rab = () => 'rab';
+export const rab = () => 'rab';
