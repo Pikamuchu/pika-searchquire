@@ -207,5 +207,28 @@ describe('Searchquire tests', function() {
       assert.equal(foo.bigRab(), 'RAB');
       assert.equal(foo.bigBas('bas'), 'BASSTUB');
     });
+
+    it('bas in es6 is resolved using babel register', function() {
+      var foo = searchquire('foo', {
+        basePath: './es6-example/samples',
+        babelRegisterConfig: {
+          babelrc: false,
+          presets: ['@babel/preset-env'],
+          ignore: ['node_modules']
+        },
+        path: {
+          basename: function() {
+            return 'BASSTUB';
+          }
+        },
+        logLevel: 1,
+        logElapseTime: true
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
+    });
   });
 });

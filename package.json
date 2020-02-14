@@ -1,10 +1,10 @@
 {
   "name": "searchquire",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "Searches proxyquire dependencies stubs recursively using configurable patterns.",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "prettier": "prettier --write \"./lib/*.js\""
   },
@@ -28,13 +28,16 @@
   "author": "Antonio Marin",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.0",
+    "@babel/register": "^7.8.0",
     "chai": "^4.2.0",
     "chai-subset": "^1.5.0",
     "codecov": "^3.5.0",
-    "eslint": "5.9.0",
+    "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
     "prettier": "^1.13.0",
