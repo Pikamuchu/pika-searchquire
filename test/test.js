@@ -195,7 +195,32 @@ describe('Searchquire tests', function() {
         basePath: './simple-example/samples'
       };
       var foo = searchquire('foo', config, {
-        path: {
+        'path': {
+          basename: function() {
+            return 'BASSTUB';
+          }
+        }
+      });
+
+      assert.isDefined(foo);
+      assert.equal(foo.bigBar(), 'BAR');
+      assert.equal(foo.bigRab(), 'RAB');
+      assert.equal(foo.bigBas('bas'), 'BASSTUB');
+    });
+
+    it('foo is resolved using stubs param over config moduleStubs', function() {
+      var config = {
+        basePath: './simple-example/samples',
+        moduleStubs: {
+          'path': {
+            basename: function() {
+              return 'ZABSTUB';
+            }
+          }
+        },
+      };
+      var foo = searchquire('foo', config, {
+        'path': {
           basename: function() {
             return 'BASSTUB';
           }
